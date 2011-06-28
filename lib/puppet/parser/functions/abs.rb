@@ -3,10 +3,14 @@
 #
 
 module Puppet::Parser::Functions
-  newfunction(:abs, :type => :rvalue, :doc => <<-EOS
-    EOS
-  ) do |arguments|
+  newfunction(:abs, :type => :rvalue, :doc => <<-EOS) do |arguments|
+    Converts to int or float and return the absolute value
 
+    Example:
+
+      $num = "-1.2"
+      $abs_num = abs($num)
+    EOS
     raise(Puppet::ParseError, "abs(): Wrong number of arguments " +
       "given (#{arguments.size} for 1)") if arguments.size < 1
 
@@ -30,5 +34,3 @@ module Puppet::Parser::Functions
     return result
   end
 end
-
-# vim: set ts=2 sw=2 et :
