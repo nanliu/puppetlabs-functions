@@ -3,10 +3,23 @@
 #
 
 module Puppet::Parser::Functions
-  newfunction(:bool2num, :type => :rvalue, :doc => <<-EOS
-    EOS
-  ) do |arguments|
+  newfunction(:bool2num, :type => :rvalue, :doc => <<-EOS) do |arguments|
+    Converts boolean to number 1 true, or 0 false. This function is
+    different from standard Puppet behavior:
+      Puppet:
+        undef, false, '': false
+        true, 'false', Any valid string: true
 
+      bool2num:
+        undef, '', '0', 'f', 'n', 'false', 'no': false
+        true, '1', 't', 'y', 'true', 'yes': true
+        default: Raise Puppet::ParseError.
+
+    Example:
+
+      $bool = true
+      $num  = bool2num($bool)
+    EOS
     raise(Puppet::ParseError, "bool2num(): Wrong number of arguments " +
       "given (#{arguments.size} for 1)") if arguments.size < 1
 
@@ -41,5 +54,3 @@ module Puppet::Parser::Functions
     return result
   end
 end
-
-# vim: set ts=2 sw=2 et :
