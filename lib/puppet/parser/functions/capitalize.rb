@@ -3,9 +3,13 @@
 #
 
 module Puppet::Parser::Functions
-  newfunction(:capitalize, :type => :rvalue, :doc => <<-EOS
+  newfunction(:capitalize, :type => :rvalue, :doc => <<-EOS) do |arguments|
+    Capitalize string or all array elements that are string.
+
+    Example:
+      $str = "hello world!"
+      $upper_str = capitalize($str)
     EOS
-  ) do |arguments|
 
     raise(Puppet::ParseError, "capitalize(): Wrong number of arguments " +
       "given (#{arguments.size} for 1)") if arguments.size < 1
@@ -28,5 +32,3 @@ module Puppet::Parser::Functions
     return result
   end
 end
-
-# vim: set ts=2 sw=2 et :
