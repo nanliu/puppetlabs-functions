@@ -8,7 +8,7 @@ module Puppet::Parser::Functions
 
     Example:
       $str = "hello world!"
-      $upper_str = capitalize($str)
+      $cap_str = capitalize($str)
     EOS
 
     raise(Puppet::ParseError, "capitalize(): Wrong number of arguments " +
